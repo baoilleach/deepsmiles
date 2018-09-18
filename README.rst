@@ -1,7 +1,7 @@
 DeepSMILES
 ==========
 
-This Python 3 module can convert well-formed SMILES (that is, as writen by a cheminformatics toolkit) to DeepSMILES. It also does the reverse conversion.
+This Python module can convert well-formed SMILES (that is, as writen by a cheminformatics toolkit) to DeepSMILES. It also does the reverse conversion.
 
 DeepSMILES is a SMILES-like syntax suited to machine learning. Rings are indicated using a single symbol instead of two, while branches do not use matching parentheses but rather use a right parenthesis as a 'pop' operator.
 
