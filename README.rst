@@ -11,7 +11,9 @@ DeepSMILES is a SMILES-like syntax suited to machine learning. Rings are indicat
 
 For example, benzene is `c1ccccc1` in SMILES but `cccccc6` in DeepSMILES (where the `6` indicates the ring size). As a branch example, the SMILES `C(Br)(OC)I` can be converted to the DeepSMILES `CBr)OC))I`. For more information, please see the corresponding preprint.
 
-The library is used as follows::
+The library is used as follows:
+
+.. code-block:: python
 
         import deepsmiles
         print("DeepSMILES version: %s" % deepsmiles.__version__)
