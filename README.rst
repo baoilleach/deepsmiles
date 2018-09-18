@@ -3,6 +3,10 @@ DeepSMILES
 
 This Python module can convert well-formed SMILES (that is, as writen by a cheminformatics toolkit) to DeepSMILES. It also does the reverse conversion.
 
+Install the latest version with::
+
+  pip install --upgrade deepsmiles
+
 DeepSMILES is a SMILES-like syntax suited to machine learning. Rings are indicated using a single symbol instead of two, while branches do not use matching parentheses but rather use a right parenthesis as a 'pop' operator.
 
 For example, benzene is `c1ccccc1` in SMILES but `cccccc6` in DeepSMILES (where the `6` indicates the ring size). As a branch example, the SMILES `C(Br)(OC)I` can be converted to the DeepSMILES `CBr)OC))I`. For more information, please see the corresponding preprint.
