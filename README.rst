@@ -9,7 +9,7 @@ Install the latest version with::
 
 DeepSMILES is a SMILES-like syntax suited to machine learning. Rings are indicated using a single symbol instead of two, while branches do not use matching parentheses but rather use a right parenthesis as a 'pop' operator.
 
-For example, benzene is `c1ccccc1` in SMILES but `cccccc6` in DeepSMILES (where the `6` indicates the ring size). As a branch example, the SMILES `C(Br)(OC)I` can be converted to the DeepSMILES `CBr)OC))I`. For more information, please see the corresponding preprint.
+For example, benzene is `c1ccccc1` in SMILES but `cccccc6` in DeepSMILES (where the `6` indicates the ring size). As a branch example, the SMILES `C(Br)(OC)I` can be converted to the DeepSMILES `CBr)OC))I`. For more information, please see the corresponding preprint (https://doi.org/10.26434/chemrxiv.7097960.v1) or the lightning talk at https://www.slideshare.net/NextMoveSoftware/deepsmiles.
 
 The library is used as follows:
 
