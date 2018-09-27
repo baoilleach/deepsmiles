@@ -1,44 +1,49 @@
-import io
-import os
-import re
 from setuptools import setup
-from setuptools.command.test import test as TestCommand
-import sys
 
 PKG_NAME = 'deepsmiles'
+AUTHOR = "Noel M O'Boyle"
+AUTHOR_EMAIL = "noel@nextmovesoftware.com"
+DOCSTRING = "DeepSMILES, a SMILES-like syntax suited to machine learning"
+VERSION = "1.0.1"
 
-HERE = os.path.abspath(os.path.dirname(__file__))
+long_description = """DeepSMILES
+==========
 
-PATTERN = r'^{target}\s*=\s*([\'"])(.+)\1$'
+This Python module can convert well-formed SMILES (that is, as writen by a cheminformatics toolkit) to DeepSMILES. It also does the reverse conversion.
 
-AUTHOR = re.compile(PATTERN.format(target='__author__'), re.M)
-DOCSTRING = re.compile(r'^([\'"])\1\1(.+)\1\1\1$', re.M)
-VERSION = re.compile(PATTERN.format(target='__version__'), re.M)
+Install the latest version with::
 
+  pip install --upgrade deepsmiles
 
-def parse_init():
-    with open(os.path.join(HERE, PKG_NAME, '__init__.py')) as f:
-        file_data = f.read()
-    return [regex.search(file_data).group(2) for regex in
-            (AUTHOR, DOCSTRING, VERSION)]
+DeepSMILES is a SMILES-like syntax suited to machine learning. Rings are indicated using a single symbol instead of two, while branches do not use matching parentheses but rather use a right parenthesis as a 'pop' operator.
 
+For example, benzene is `c1ccccc1` in SMILES but `cccccc6` in DeepSMILES (where the `6` indicates the ring size). As a branch example, the SMILES `C(Br)(OC)I` can be converted to the DeepSMILES `CBr)OC))I`. For more information, please see the corresponding preprint.
 
-def read(*filenames, **kwargs):
-    encoding = kwargs.get('encoding', 'utf-8')
-    sep = kwargs.get('sep', '\n')
-    buf = []
-    for filename in filenames:
-        with io.open(filename, encoding=encoding) as f:
-            buf.append(f.read())
-    return sep.join(buf)
+The library is used as follows:
 
+.. code-block:: python
 
-long_description = read('README.rst')
-author, description, version = parse_init()
+        import deepsmiles
+        print("DeepSMILES version: %s" % deepsmiles.__version__)
+        converter = deepsmiles.Converter(rings=True, branches=True)
+        print(converter) # record the options used
+
+        encoded = converter.encode("c1cccc(C(=O)Cl)c1")
+        print("Encoded: %s" % encoded)
+
+        try:
+            decoded = converter.decode(encoded)
+        except deepsmiles.DecodeError as e:
+            decoded = None
+            print("DecodeError! Error message was '%s'" % e.message)
+
+        if decoded:
+            print("Decoded: %s" % decoded)
+"""
 
 setup(
-    author=author,
-    author_email='noel@nextmovesoftware.com',
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -46,7 +51,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
     ],
-    description=description,
+    description=DOCSTRING,
     license='License :: OSI Approved :: MIT License',
     long_description=long_description,
     name=PKG_NAME,
@@ -54,5 +59,5 @@ setup(
     platforms='any',
     test_suite = "deepsmiles.testsuite",
     url='http://github.com/nextmovesoftware/deepsmiles',
-    version=version,
+    version=VERSION,
 )

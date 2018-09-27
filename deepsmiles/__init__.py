@@ -10,7 +10,7 @@
 
 __name__ = "deepsmiles"
 __author__ = "Noel M O'Boyle"
-__version__ = "1.0"
+__version__ = "1.0.1"
 __license__ = "MIT"
 __copyright__ = "NextMove Software 2018"
 
