@@ -101,7 +101,7 @@ class BondClosureInfo:
         # This information will be used to generate the final string
         self.symbolinfo = defaultdict(list)
 
-def encode(smi, rings=False, branches=False):
+def encode(smi, rings=False, branches=False, branchlength=False):
     """Encode SMILES as DeepSMILES"""
 
     if not rings and not branches:
@@ -120,9 +120,12 @@ def encode(smi, rings=False, branches=False):
     while i < len(smi):
         x = smi[i]
         if x == ')':
-            lastbranch = smi_prev.pop()
+            branchlen = len(smi_prev.pop())
             if branches:
-                ans.append(')'*len(lastbranch))
+                if branchlength:
+                    ans.append(")%d" % branchlen if branchlen > 1 else ")")
+                else:
+                    ans.append(')' * branchlen)
             else:
                 ans.append(')')
         elif x == '(':
@@ -194,4 +197,4 @@ def encode(smi, rings=False, branches=False):
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod()
+    doctest.testmod

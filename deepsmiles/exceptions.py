@@ -24,6 +24,18 @@ class Error(Exception):
     """Base class for DeepSMILES exceptions."""
     pass
 
+class ConverterError(Error):
+    """Exception raised for errors initialising a Converter"""
+    def __init__(self, expression, allowedvalues):
+        self.expression = expression
+        self.allowedvalues = allowedvalues
+
+    def __str__(self):
+        return """The specified option '%s' was not recognised.
+Supported options are:
+   %s""" % (self.expression, ", ".join(self.allowedvalues))
+
+
 class DecodeError(Error):
     """Exception raised for errors in the input.
 

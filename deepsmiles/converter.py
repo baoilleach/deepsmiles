@@ -21,8 +21,10 @@
 from . import encode
 from . import decode
 
+optionnames = set(["branchlength"])
+
 class Converter:
-    def __init__(self, rings=False, branches=False):
+    def __init__(self, rings=False, branches=False, options=None):
         """Initialise a Converter object.
 
         By default, nothing is converted, so you probably should specify
@@ -33,6 +35,10 @@ class Converter:
         """
         self.rings = rings
         self.branches = branches
+        options = {} if options is None else options
+        self.branchlength = options.pop("branchlength", False)
+        for k in options.keys():
+            raise ConverterError(k, optionnames)
     def encode(self, smiles):
         """Encode a SMILES string as DeepSMILES"""
         return encode.encode(smiles, rings=self.rings, branches=self.branches)
@@ -41,8 +47,9 @@ class Converter:
         return decode.decode(deepsmiles, rings=self.rings, branches=self.branches)
     def __str__(self):
         """Return a string representation"""
-        return "Converter(rings=%s, branches=%s)" % (
-                ["False", "True"][self.rings],
-                ["False", "True"][self.branches])
-
+        optionstring = "'branchlength': %s" % str(self.branchlength)
+        return "Converter(rings=%s, branches=%s, options={%s})" % (
+                str(self.rings),
+                str(self.branches),
+                optionstring)
 

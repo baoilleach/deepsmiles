@@ -24,13 +24,17 @@ import deepsmiles as ds
 class ConverterTest(unittest.TestCase):
     def testStringRep(self):
         self.assertEqual(str(ds.Converter()),
-                "Converter(rings=False, branches=False)")
+                "Converter(rings=False, branches=False, options={'branchlength': False})")
         self.assertEqual(str(ds.Converter(rings=True)),
-                "Converter(rings=True, branches=False)")
+                "Converter(rings=True, branches=False, options={'branchlength': False})")
         self.assertEqual(str(ds.Converter(branches=True)),
-                "Converter(rings=False, branches=True)")
+                "Converter(rings=False, branches=True, options={'branchlength': False})")
         self.assertEqual(str(ds.Converter(rings=True, branches=True)),
-                "Converter(rings=True, branches=True)")
+                "Converter(rings=True, branches=True, options={'branchlength': False})")
+        self.assertEqual(str(ds.Converter(rings="noel")),
+                "Converter(rings=noel, branches=False, options={'branchlength': False})")
+        self.assertEqual(str(ds.Converter(branches=True, options={"branchlength": True})),
+                "Converter(rings=False, branches=True, options={'branchlength': True})")
 
 class Encoding(unittest.TestCase):
     def testRingEncoding(self):
