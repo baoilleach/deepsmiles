@@ -1,7 +1,7 @@
 DeepSMILES
 ==========
 
-This Python module can convert well-formed SMILES (that is, as writen by a cheminformatics toolkit) to DeepSMILES. It also does the reverse conversion.
+This Python module can convert well-formed SMILES (that is, as written by a cheminformatics toolkit) to DeepSMILES. It also does the reverse conversion.
 
 Install the latest version with::
 
