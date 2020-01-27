@@ -145,5 +145,10 @@ class Decoding(unittest.TestCase):
         for dsmi in data:
             self.assertRaises(ds.DecodeError, converter.decode, dsmi)
 
+    def testDecodingBasic(self):
+        converter = ds.Converter()
+        dsmi = converter.decode("C")
+        self.assertEqual("C", dsmi)
+
 if __name__ == "__main__":
     unittest.main()
