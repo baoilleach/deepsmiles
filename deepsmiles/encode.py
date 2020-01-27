@@ -139,8 +139,13 @@ def encode(smi, rings=False, branches=False):
                 depth = sum(len(z) for z in smi_prev)
                 bondchar = smi[i-1] if i > 0 and smi[i-1] in bondchars else ""
                 if x == "%":
-                    bcsymbol = smi[i:i+3]
-                    i += 2
+                    if smi[i+1] != '(':
+                        bcsymbol = smi[i:i+3]
+                        i += 2
+                    else:
+                        closeparens = smi.find(")", i+1)
+                        bcsymbol = smi[i:closeparens]
+                        i = closeparens
                 else:
                     bcsymbol = x
                 if bcsymbol in bci.ringopenings:

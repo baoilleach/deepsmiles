@@ -51,9 +51,14 @@ class Tree:
             except:
                 return False
         self.rc_digit += 1
-        prefix = "%" if self.rc_digit >= 10 else ""
-        self.nodes[_from] += bondchar + prefix + str(self.rc_digit)
-        self.nodes[curr] += prefix + str(self.rc_digit)
+        if self.rc_digit < 10:
+            smi_bcsymbol = str(self.rc_digit)
+        elif self.rc_digit < 100:
+            smi_bcsymbol = "%" + str(self.rc_digit)
+        else:
+            smi_bcsymbol = "%(" + str(self.rc_digit) + ")"
+        self.nodes[_from] += bondchar + smi_bcsymbol
+        self.nodes[curr] += smi_bcsymbol
         return True
 
     def to_smiles(self):
@@ -202,7 +207,12 @@ def decode_only_rings(deepsmiles):
                     i += 2
             else:
                 ringsize = int(x)
-            smi_bcsymbol = "%d" % digit if digit < 10 else "%%%d" % digit
+            if digit < 10:
+                smi_bcsymbol = str(digit)
+            elif digit < 100:
+                smi_bcsymbol = "%" + str(digit)
+            else:
+                smi_bcsymbol = "%(" + str(digit) + ")"
             ans[-1] += bondchar + smi_bcsymbol
             try:
                 ring_open_atom_idx = nth(flatten_in_reverse(smi_prev), ringsize - 1)
