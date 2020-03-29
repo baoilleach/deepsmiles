@@ -20,7 +20,7 @@
 
 from collections import defaultdict
 
-bondchars = "-=#$\\/"
+bondchars = "-=#$:\\/"
 CLOSE, OPEN = range(2)
 
 def invertStereo(smifragment):

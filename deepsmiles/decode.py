@@ -23,7 +23,7 @@ from collections import defaultdict
 
 from . import exceptions
 
-bondchars = "-=#$/\\"
+bondchars = "-=#$:/\\"
 
 def is_ring_symbol(char):
     return char.isdigit() or char=='%'
