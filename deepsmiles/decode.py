@@ -239,7 +239,7 @@ def decode(deepsmiles, rings=False, branches=False):
     Decode DeepSMILES to SMILES
     """
     if not rings and not branches:
-        return smi
+        return deepsmiles
 
     if not branches:
         return decode_only_rings(deepsmiles)
