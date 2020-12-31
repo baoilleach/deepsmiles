@@ -106,9 +106,15 @@ def decode_branches(deepsmiles, rings):
             else:
                 try:
                     digit = int(deepsmiles[i+1:i+3])
+                    num_digits = 2
+                    try: # Check if three digits follow the %
+                        digit = int(deepsmiles[i+1:i+4])
+                        num_digits = 3
+                    except:
+                        pass
                 except ValueError:
-                    raise exceptions.DecodeError(deepsmiles, i, "'%' should be followed by two digits")
-                i += 2
+                    raise exceptions.DecodeError(deepsmiles, i, "'%' should be followed by at least two digits")
+                i += num_digits
             ok = tree.add_ring_closure(idx, digit, bondchar)
             if not ok:
                 raise exceptions.DecodeError(deepsmiles, i, "There is no corresponding atom on which to place the ring opening symbol for the ring sized %s" % digit)
